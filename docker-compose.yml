@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+  db:
+    env_file: ./.env
+    container_name: mysql
+    hostname: mysql
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    command: mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+  webapp:
+    container_name: app
+    hostname: app
+    build:
+      context: ./Dockerfile.development
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: on-failure
+    depends_on:
+      - mysql
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:4.0.9
+    restart: on-failure
+    ports:
+      - "6379:6379"
+volumes:
+  dbdata:
