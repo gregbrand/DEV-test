@@ -32,7 +32,8 @@ https://codeigniter.com/userguide2/
    * update($id): Update an existing record based on the provided $id. 
    * delete($id): Delete a record based on the provided $id.
 
-4. Create View files (pages) where you will be able to create/read/update/delete ToDos.
+4. Create View files (pages) where you will be able to create/read/update/delete ToDos. If you fill adventures, you can write previous controller functions as API and
+develop separated VueJs or React app, which will consume API. Your call, any option is valid and appreciated.
  
 **Implement proper error handling and validation for these functions.**
 
